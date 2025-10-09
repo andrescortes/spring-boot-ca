@@ -32,6 +32,7 @@ public class CategoryJPARepositoryAdapter extends AdapterOperations<Category/* c
     @Override
     public Category createOne(Category saveCategory) {
         CategoryData data = super.toData(saveCategory);
+        data.setStatus(CategoryData.CategoryStatus.ENABLED);
         CategoryData save = repository.save(data);
         return super.toEntity(save);
 
@@ -49,8 +50,12 @@ public class CategoryJPARepositoryAdapter extends AdapterOperations<Category/* c
     }
 
     @Override
-    public Category disableOneById(Long categoryId) {
-        return findOneById(categoryId)
-                .orElseThrow(() -> new ObjectNotFoundException("Category not found"));
+    public Optional<Category> disableOneById(Long categoryId) {
+        return repository.findById(categoryId)
+                .map(data -> {
+                    data.setStatus(CategoryData.CategoryStatus.DISABLED);
+                    CategoryData save = repository.save(data);
+                    return super.toEntity(save);
+                });
     }
 }

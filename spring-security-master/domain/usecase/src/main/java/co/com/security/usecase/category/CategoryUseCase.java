@@ -2,10 +2,10 @@ package co.com.security.usecase.category;
 
 import co.com.security.model.category.Category;
 import co.com.security.model.category.gateways.CategoryRepository;
-import co.com.security.model.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public class CategoryUseCase {
@@ -15,9 +15,8 @@ public class CategoryUseCase {
         return categoryRepository.findAll();
     }
 
-    public Category findOne(Long categoryId) {
-        return categoryRepository.findOneById(categoryId)
-                .orElseThrow(() -> new ObjectNotFoundException("Category not found"));
+    public Optional<Category> findOne(Long categoryId) {
+        return categoryRepository.findOneById(categoryId);
     }
 
     public Category createCategory(Category category) {
@@ -28,7 +27,7 @@ public class CategoryUseCase {
         return categoryRepository.updateOneById(categoryId, category);
     }
 
-    public Category deleteCategory(Long categoryId) {
+    public Optional<Category> deleteCategory(Long categoryId) {
         return categoryRepository.disableOneById(categoryId);
     }
 }

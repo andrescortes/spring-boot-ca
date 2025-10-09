@@ -15,5 +15,5 @@ public interface CategoryRepository {
 
     Category updateOneById(Long categoryId, Category saveCategory);
 
-    Category disableOneById(Long categoryId);
+    Optional<Category> disableOneById(Long categoryId);
 }
