@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class CategoryJPARepositoryAdapter extends AdapterOperations<Category/* change for domain model */, CategoryData/* change for adapter model */, Long, ICategoryJPARepository>
+public class CategoryJPARepositoryAdapter extends AdapterOperations<Category/* change for domain model */,
+        CategoryData/* change for adapter model */, Long, ICategoryJPARepository>
 // implements ModelRepository from domain
         implements CategoryRepository {
 

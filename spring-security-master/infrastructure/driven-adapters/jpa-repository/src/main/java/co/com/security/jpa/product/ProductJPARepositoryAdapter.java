@@ -60,8 +60,8 @@ public class ProductJPARepositoryAdapter extends AdapterOperations<
     public Product disableOneById(Long productId) {
         return repository.findById(productId)
                 .map(productData -> {
-                    repository.delete(productData);
-                    return super.toEntity(productData);
+                    productData.setStatus(ProductData.ProductStatus.DISABLED);
+                    return super.toEntity(repository.save(productData));
                 })
                 .orElseThrow(() -> new ObjectNotFoundException(String.format("Product: %s not found", productId)));
     }

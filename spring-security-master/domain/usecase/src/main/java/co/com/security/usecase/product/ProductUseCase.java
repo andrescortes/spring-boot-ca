@@ -29,7 +29,7 @@ public class ProductUseCase {
         return productRepository.updateOneById(productId, product);
     }
 
-    public Product deleteCategory(Long productId) {
+    public Product disableOneById(Long productId) {
         return productRepository.disableOneById(productId);
     }
 }
