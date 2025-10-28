@@ -5,7 +5,6 @@ import co.com.security.model.product.Product;
 import co.com.security.usecase.product.ProductUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-@RequestMapping(name = "products", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping("/products")
 @RestController
 @RequiredArgsConstructor
 public class ProductRest {
@@ -26,21 +26,23 @@ public class ProductRest {
     private final ProductUseCase productUseCase;
 
     @GetMapping("/page/{page}/size/{size}")
-    public ResponseEntity<ProductPageDto> findAll(@PathVariable Long page, @PathVariable Long size) {
+    public ResponseEntity<ProductPageDto> findAll(@PathVariable(name = "page") Long page,
+                                                  @PathVariable(name = "size") Long size) {
         if (Objects.isNull(page) || Objects.isNull(size)) {
             return ResponseEntity.badRequest().build();
         }
         List<Product> products = productUseCase.findAll();
-        ProductPageDto pageDto = ProductPageDto.builder().page(page).size(size).products(products.subList(0,
-                products.size() - 1)).total(products.size()).build();
+        ProductPageDto pageDto = ProductPageDto.builder()
+                .page(page)
+                .size(size)
+                .products(products.isEmpty() ? Collections.emptyList() : products)
+                .total(products.size())
+                .build();
         return ResponseEntity.ok(pageDto);
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> getProduct(@PathVariable Long productId) {
-        if (Objects.isNull(productId)) {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<Product> getProduct(@PathVariable(name = "productId") Long productId) {
         return ResponseEntity.ok(productUseCase.findOne(productId));
     }
 

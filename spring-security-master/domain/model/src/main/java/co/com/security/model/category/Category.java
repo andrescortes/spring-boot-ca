@@ -3,11 +3,12 @@ package co.com.security.model.category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class Category {
@@ -17,7 +18,7 @@ public class Category {
 
     private CategoryStatus status;
 
-    public static enum CategoryStatus {
+    public enum CategoryStatus {
         ENABLED, DISABLED;
     }
 }

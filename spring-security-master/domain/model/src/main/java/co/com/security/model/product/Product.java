@@ -4,13 +4,14 @@ import co.com.security.model.category.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class Product {
@@ -24,7 +25,7 @@ public class Product {
 
     private Category category;
 
-    public static enum ProductStatus {
+    public enum ProductStatus {
         ENABLED, DISABLED;
     }
 }

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "categories", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping("/categories")
 @RequiredArgsConstructor
 public class CategoryRest {
 
@@ -63,7 +63,8 @@ public class CategoryRest {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(useCase.createCategory(Category.builder()
                         .name(dto.getName())
-                        .build()));
+                        .build())
+                );
     }
 
     @PutMapping("/{id}")

@@ -1,5 +1,6 @@
 package co.com.security.jpa.product;
 
+import co.com.security.jpa.category.CategoryData;
 import co.com.security.jpa.helper.AdapterOperations;
 import co.com.security.model.exceptions.ObjectNotFoundException;
 import co.com.security.model.product.Product;
@@ -36,7 +37,11 @@ public class ProductJPARepositoryAdapter extends AdapterOperations<
 
     @Override
     public Product createOne(Product saveProduct) {
+        CategoryData categoryData = CategoryData.builder()
+                .id(saveProduct.getCategory().getId())
+                .build();
         ProductData data = super.toData(saveProduct);
+        data.setCategory(categoryData);
         ProductData save = repository.save(data);
         return super.toEntity(save);
     }

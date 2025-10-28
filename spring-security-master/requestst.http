@@ -1,0 +1,42 @@
+### create category
+POST http://localhost:8080/api/v1/categories
+Content-Type: application/json
+
+{
+  "name": "Cloths",
+  "status": "ENABLED"
+}
+
+### products
+GET http://localhost:8080/api/v1/products/2
+
+### products page
+GET http://localhost:8080/api/v1/products/page/1/size/10
+
+### create product
+POST http://localhost:8080/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "Generic Jeans",
+  "price": 2500.40,
+  "category": {
+    "id": 2
+  },
+  "status": "ENABLED"
+}
+
+### create product
+PUT http://localhost:8080/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "Le Marche T-shirt",
+  "price": 2000.20,
+  "category": {
+    "id": 1,
+    "name": "Art",
+    "status": "ENABLED"
+  },
+  "status": "ENABLED"
+}
