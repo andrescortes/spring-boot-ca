@@ -20,6 +20,6 @@ public class UserAppDto {
     private String email;
     @JsonIgnore
     private String password;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private String createdAt;
 }

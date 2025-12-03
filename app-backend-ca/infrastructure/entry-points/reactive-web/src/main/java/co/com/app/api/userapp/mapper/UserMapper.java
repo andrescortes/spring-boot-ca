@@ -9,9 +9,9 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", source = "createdAt", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Mapping(target = "createdAt", source = "createdAt", dateFormat = "yyyy-MM-dd")
     UserApp toEntity(UserAppDto dto);
 
-    @Mapping(target = "createdAt", source = "createdAt", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Mapping(target = "createdAt", source = "createdAt", dateFormat = "yyyy-MM-dd")
     UserAppDto toDto(UserApp entity);
 }

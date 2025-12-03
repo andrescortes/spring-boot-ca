@@ -1,6 +1,5 @@
 package co.com.app.jpa.userapp.data;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -27,6 +26,5 @@ public class UserData {
     private String name;
     private String email;
     private String password;
-    @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 }
