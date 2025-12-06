@@ -4,6 +4,16 @@ GET http://localhost:9000/api/v1/users
 ### get user by id
 GET http://localhost:9000/api/v1/users/1
 
+### create user
+POST http://localhost:9000/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "bet",
+  "email": "bet@gmail.com",
+  "createdAt": "2025-12-12"
+}
+
 ### update user
 PATCH http://localhost:9000/api/v1/users/1
 Content-Type: application/json
@@ -12,5 +22,5 @@ Content-Type: application/json
   "id": 1,
   "name": "peter2",
   "email": "peter@gmail.com",
-  "createdAt": "2025-11-11 00:00:00"
+  "createdAt": "2025-11-11"
 }
