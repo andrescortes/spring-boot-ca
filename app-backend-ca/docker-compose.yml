@@ -1,13 +1,15 @@
 services:
-  app:
+
+  app-ca:
     image: devcoderjava/app-ca:1.0
-    container_name: app
+    container_name: app-ca
     ports:
       - "9000:9000"
     environment:
-      - ALLOW_ORIGIN_LIST=http://localhost
+      - ALLOW_ORIGIN_LIST=http://localhost:80,http://localhost
     networks:
       - app-nk
+
   fr:
     image: devcoderjava/app-ca-fr:1.0
     container_name: fr
@@ -16,6 +18,7 @@ services:
     networks:
       - app-nk
     depends_on:
-      - app
+      - app-ca
 networks:
   app-nk:
+    driver: bridge
