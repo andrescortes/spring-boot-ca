@@ -1,0 +1,21 @@
+services:
+  app:
+    image: devcoderjava/app-ca:1.0
+    container_name: app
+    ports:
+      - "9000:9000"
+    environment:
+      - ALLOW_ORIGIN_LIST=http://localhost
+    networks:
+      - app-nk
+  fr:
+    image: devcoderjava/app-ca-fr:1.0
+    container_name: fr
+    ports:
+      - "80:80"
+    networks:
+      - app-nk
+    depends_on:
+      - app
+networks:
+  app-nk:

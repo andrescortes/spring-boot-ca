@@ -30,5 +30,8 @@ management:
     health:
       probes:
         enabled: true
+logging:
+  level:
+    org.springframework.web.cors: DEBUG
 cors:
-  allowed-origins: "http://localhost:4200,http://localhost:8080"
+  allowed-origins: "${ALLOW_ORIGIN_LIST:http://localhost:4200}"
