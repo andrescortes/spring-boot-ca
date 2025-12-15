@@ -1,0 +1,13 @@
+#Step 1
+minikube addons enable ingress
+#Step 2
+kubectl apply -f /k8s
+#Step 3
+minikube tunnel
+# add host to etc/hosts, ever in localhost 127.0.0.1
+#Step 4
+#127.0.0.1    app.local
+#Step 5
+kubectl delete -f /k8s
+#Step 6
+minikube delete --all or minikube pause/unpause

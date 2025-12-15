@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-ca
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-ca
+  template:
+    metadata:
+      labels:
+        app: app-ca
+    spec:
+      containers:
+        - name: app-ca
+          image: devcoderjava/app-ca:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9000
+          env:
+            - name: ALLOW_ORIGIN_LIST
+              value: "http://localhost:80,http://localhost"
