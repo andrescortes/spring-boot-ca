@@ -1,13 +1,23 @@
 #Step 1
-minikube addons enable ingress
+minikube start
 #Step 2
-kubectl apply -f /k8s
+'minikube image build . -t app-ca-local:1.0' to backend, 'minikube image build . -t app-ca-fr-local:1.0' to frontend
+deployment => image: app-ca-local:1.0, imagePullPolicy: Never
 #Step 3
+minikube addons enable ingress
+#Step 4
+kubectl apply -f /k8s
+#Step 5
 minikube tunnel
 # add host to etc/hosts, ever in localhost 127.0.0.1
-#Step 4
-#127.0.0.1    app.local
-#Step 5
-kubectl delete -f /k8s
 #Step 6
+#127.0.0.1    app.local
+#Step 7
+kubectl delete -f /k8s
+#Step 8
 minikube delete --all or minikube pause/unpause
+
+Utils:
+kubectl get pods -w
+kubectl logs pod-123-43 -f
+minikube image ls --format table

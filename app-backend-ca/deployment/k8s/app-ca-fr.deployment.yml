@@ -16,8 +16,10 @@ spec:
     spec:
       containers:
         - name: app-ca-fr
-          image: devcoderjava/app-ca-fr:1.0
-          imagePullPolicy: Always
+          #          image: devcoderjava/app-ca-fr:1.0
+          #          imagePullPolicy: Always
+          image: app-ca-fr-local:1.0
+          imagePullPolicy: Never
           ports:
             - containerPort: 80
           env:

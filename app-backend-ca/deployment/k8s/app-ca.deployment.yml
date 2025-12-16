@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app-ca
+  labels:
+    app: app-ca
 spec:
   replicas: 1
   selector:
@@ -14,10 +16,16 @@ spec:
     spec:
       containers:
         - name: app-ca
-          image: devcoderjava/app-ca:1.0
-          imagePullPolicy: Always
+          #          image: devcoderjava/app-ca:1.0
+          #          imagePullPolicy: Always
+          image: app-ca-local:1.0
+          imagePullPolicy: Never
           ports:
             - containerPort: 9000
           env:
             - name: ALLOW_ORIGIN_LIST
-              value: "http://localhost:80,http://localhost"
+              #              value: "http://localhost:80,http://localhost"
+              valueFrom:
+                configMapKeyRef:
+                  name: app-ca-cfmap
+                  key: ALLOW_ORIGIN_LIST
