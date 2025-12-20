@@ -1,3 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-ca-fr
+  labels:
+    app: app-ca-fr
+spec:
+  type: ClusterIP
+  selector:
+    app: app-ca-fr
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:

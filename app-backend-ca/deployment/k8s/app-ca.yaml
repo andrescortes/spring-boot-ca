@@ -1,3 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-ca
+  labels:
+    app: app-ca
+spec:
+  type: ClusterIP
+  selector:
+    app: app-ca
+  ports:
+    - port: 9000
+      targetPort: 9000
+      protocol: TCP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,5 +42,5 @@ spec:
               #              value: "http://localhost:80,http://localhost"
               valueFrom:
                 configMapKeyRef:
-                  name: app-ca-cfmap
+                  name: app-ca-cfgmap
                   key: ALLOW_ORIGIN_LIST
