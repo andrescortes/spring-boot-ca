@@ -1,0 +1,17 @@
+##Spring Configuration
+server:
+  port: 8080
+spring:
+  application:
+    name: IPTVApp
+  devtools:
+    add-properties: false
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  profiles:
+    include:
+
+iptv:
+  playlistUrl: "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"
