@@ -1,0 +1,20 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+### POST all channels
+POST http://localhost:8080/api/channels
+Content-Type: application/json
+
+{
+  "name": "",
+  "group": "",
+  "page": 1,
+  "size": 100
+}
+
+### GET channel with id 1
+GET http://localhost:8080/api/channels/1
+
+### GET channel by group
+GET http://localhost:8080/api/channel-groups
