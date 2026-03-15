@@ -19,7 +19,7 @@ public class ChannelRouterRest {
                                 nested -> nested
                                         .POST("/channels", handler::getAllChannels)
                                         .GET("/channels/{id}", handler::getChannelById)
-                                        .GET("/channel-groups", handler::getGroups)
+                                        .GET("/channel-groups", handler::getAllChanelGroups)
                         )
                 )
                 .build();

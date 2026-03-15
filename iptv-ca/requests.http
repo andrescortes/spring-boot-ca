@@ -3,18 +3,18 @@ GET https://examples.http-client.intellij.net/get
     ?generated-in=IntelliJ IDEA
 
 ### POST all channels
-POST http://localhost:8080/api/channels
+POST http://localhost:9000/api/channels
 Content-Type: application/json
 
 {
   "name": "",
   "group": "",
   "page": 1,
-  "size": 100
+  "size": 5
 }
 
 ### GET channel with id 1
-GET http://localhost:8080/api/channels/1
+GET http://localhost:9000/channels/1889
 
 ### GET channel by group
-GET http://localhost:8080/api/channel-groups
+GET http://localhost:9000/api/channel-groups

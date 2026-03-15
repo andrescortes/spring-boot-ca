@@ -1,5 +1,6 @@
 package co.com.iptv.consumer.config;
 
+import io.netty.handler.logging.LogLevel;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,7 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
+import reactor.netty.transport.logging.AdvancedByteBufFormat;
 
 import static io.netty.channel.ChannelOption.CONNECT_TIMEOUT_MILLIS;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
@@ -50,6 +52,7 @@ public class RestConsumerConfig {
         IF YO REQUIRE APPEND SSL CERTIFICATE SELF SIGNED: this should be in the default cacerts trustore
         */
         return new ReactorClientHttpConnector(HttpClient.create()
+                .wiretap("reactor.netty.http.client.HttpClient", LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL)
                 .compress(true)
                 .keepAlive(true)
                 .option(CONNECT_TIMEOUT_MILLIS, timeout)

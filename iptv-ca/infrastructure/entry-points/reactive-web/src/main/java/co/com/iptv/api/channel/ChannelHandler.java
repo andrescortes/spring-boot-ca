@@ -14,6 +14,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -30,7 +31,6 @@ public class ChannelHandler {
                     String groupName = Optional.ofNullable(channel)
                             .map(chan -> chan.getGroupTitle())
                             .orElse("");
-                    log.info("Group: {}, GroupName: {}", group, groupName);
                     return group.equalsIgnoreCase(groupName);
                 });
     }
@@ -41,13 +41,10 @@ public class ChannelHandler {
                     String channelName = Optional.ofNullable(channel)
                             .map(chan -> chan.getName())
                             .orElse("");
-                    log.info("Name: {}, ChannelName: {}", name, channelName);
                     return name.equalsIgnoreCase(channelName);
                 });
     }
 
-    // TODO: use @Caching for getGroups and getChannels
-    // TODO: use @Caching for page and size parameters in getChannels
     public Mono<ServerResponse> getAllChannels(ServerRequest request) {
         return request.bodyToMono(ChannelRequest.class)
                 .flatMap(req -> {
@@ -74,6 +71,26 @@ public class ChannelHandler {
                 });
     }
 
+    public Mono<ServerResponse> getAllChanelGroups(ServerRequest request) {
+        var groups = channelUseCase.getChannels()
+                .collectMultimap(Channel::getGroupTitle)
+                .flatMapMany(map -> Flux.fromIterable(map.entrySet()))
+                .map(entry -> {
+                    String country = entry.getKey();
+                    var channels = new ArrayList<>(entry.getValue());
+                    return ChannelGroup.builder()
+                            .name(country)
+                            .channelsCount(channels.size())
+                            .channels(channels)
+                            .build();
+                });
+
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(groups, ChannelGroup.class);
+
+    }
+
     public Mono<ServerResponse> getChannelById(ServerRequest request) {
         String id = request.pathVariable("id");
         var channels = channelUseCase.getChannels();
@@ -85,18 +102,5 @@ public class ChannelHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .bodyValue(channel))
                 .switchIfEmpty(ServerResponse.notFound().build());
-    }
-
-    public Mono<ServerResponse> getGroups(ServerRequest request) {
-        Flux<ChannelGroup> groups = channelUseCase.getChannels()
-                .groupBy(c -> Objects.nonNull(c) ? c.getGroupTitle() : "Unknown")
-                .flatMap(groupedFlux -> groupedFlux
-                        .count()
-                        .map(count -> new ChannelGroup(groupedFlux.key(), Math.toIntExact(count)))
-                );
-        return ServerResponse
-                .ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(groups, ChannelGroup.class);
     }
 }

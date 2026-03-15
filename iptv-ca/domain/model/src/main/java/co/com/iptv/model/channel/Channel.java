@@ -18,6 +18,5 @@ public class Channel {
     private String groupTitle;
     private String logo;
     private String country;
-    private String language;
     private String tvgId;
 }
