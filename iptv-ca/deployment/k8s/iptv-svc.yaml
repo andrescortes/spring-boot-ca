@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: iptv-backend-svc
+  labels:
+    app: iptv-backend
+spec:
+  selector:
+    app: iptv-backend
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
+  type: ClusterIP
+  

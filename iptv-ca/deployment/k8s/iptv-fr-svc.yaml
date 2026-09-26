@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: iptv-fr-svc
+  labels:
+    app: iptv-fr
+spec:
+  selector:
+    app: iptv-fr
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

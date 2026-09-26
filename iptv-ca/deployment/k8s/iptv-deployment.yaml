@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iptv-backend
+  labels:
+    app: iptv-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: iptv-backend
+  template:
+    metadata:
+      name: iptv-backend
+      labels:
+        app: iptv-backend
+    spec:
+      containers:
+        - name: iptv
+          image: iptv:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9000
+              protocol: TCP
+          env:
+            - name: ALLOWED_ORIGINS
+              valueFrom:
+                configMapKeyRef:
+                  name: iptv-config-map
+                  key: ALLOWED_ORIGINS
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              port: 9000
+              path: /actuator/health
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              port: 9000
+              path: /actuator/health
+            initialDelaySeconds: 60
+            periodSeconds: 20
+      restartPolicy: Always

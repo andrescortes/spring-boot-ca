@@ -1,0 +1,26 @@
+services:
+  iptv:
+    container_name: iptv
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+#      - ALLOWED_ORIGINS=http://localhost:4200,http://localhost
+      - ALLOWED_ORIGINS=http://localhost
+    ports:
+      - "9000:9000"
+    networks:
+      - iptv-network
+
+  iptv-fr:
+    container_name: iptv-fr
+    image: iptv-fr:1.0
+    ports:
+      - "80:80"
+    networks:
+      - iptv-network
+    depends_on:
+      - iptv
+
+networks:
+  iptv-network:
