@@ -19,7 +19,6 @@ include ':usecase'
 include ':rest-consumer'
 include ':reactive-web'
 include ':iptv-helper'
-include ':r2dbc-postgresql'
 
 project(':app-service').projectDir = file('./applications/app-service')
 project(':model').projectDir = file('./domain/model')
@@ -27,4 +26,3 @@ project(':usecase').projectDir = file('./domain/usecase')
 project(':rest-consumer').projectDir = file('./infrastructure/driven-adapters/rest-consumer')
 project(':reactive-web').projectDir = file('./infrastructure/entry-points/reactive-web')
 project(':iptv-helper').projectDir = file('./infrastructure/helpers/iptv')
-project(':r2dbc-postgresql').projectDir = file('./infrastructure/driven-adapters/r2dbc-postgresql')

@@ -50,4 +50,4 @@ resilience4j:
 #        minimumNumberOfCalls: 10
 #        waitDurationInOpenState: "10s"
 cors:
-  allowed-origins: "http://localhost:4200,http://localhost:8080"
+  allowed-origins: ${ALLOWED_ORIGINS:http://localhost:4200,http://localhost:8080,http://iptv-fr:4200}

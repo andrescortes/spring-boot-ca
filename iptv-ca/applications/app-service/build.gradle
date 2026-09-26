@@ -1,7 +1,6 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
-    implementation project(':r2dbc-postgresql')
     implementation project(':iptv-helper')
     implementation project(':reactive-web')
     implementation project(':rest-consumer')
