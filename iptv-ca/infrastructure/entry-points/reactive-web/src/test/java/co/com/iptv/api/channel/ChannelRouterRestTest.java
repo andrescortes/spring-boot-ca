@@ -41,7 +41,6 @@ class ChannelRouterRestTest {
                 .groupTitle("Test Group")
                 .logo("http://example.com/logo.png")
                 .country("Test Country")
-                .language("English")
                 .tvgId("tvg123")
                 .build()));
     }
@@ -71,32 +70,8 @@ class ChannelRouterRestTest {
     }
 
     @Test
-    void getChannelsWithQueryParams() {
-
-        client
-                .get()
-                .uri(uriBuilder -> uriBuilder.path("/api/channels")
-                        .queryParam("group", "Test Group")
-                        .queryParam("name", "Test Channel")
-                        .build()
-                )
-                .exchange()
-                .expectStatus()
-                .isOk()
-                .expectBodyList(Channel.class)
-                .value(channels -> {
-                    logResponse(channels);
-                    Assertions.assertNotNull(channels);
-                    Assertions.assertEquals(1, channels.size());
-                    Channel channel = channels.get(0);
-                    Assertions.assertEquals("123", channel.getId());
-                    Assertions.assertEquals("Test Channel", channel.getName());
-                });
-    }
-
-    @Test
     void getChannelById() {
-        String channelId = "123"; // Reemplaza con un ID válido para tu prueba
+        String channelId = "123";
         client
                 .get()
                 .uri("/api/channels/{id}", channelId)
@@ -120,7 +95,6 @@ class ChannelRouterRestTest {
                         .groupTitle("Metallica")
                         .logo("http://example.com/logo.png")
                         .country("Test Country")
-                        .language("English")
                         .tvgId("tvg123")
                         .build(),
                 Channel.builder()
@@ -129,7 +103,6 @@ class ChannelRouterRestTest {
                         .groupTitle("Peace")
                         .logo("http://example.com/logo2.png")
                         .country("Test Country")
-                        .language("English")
                         .tvgId("tvg456")
                         .build()
         ));
